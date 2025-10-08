@@ -40,7 +40,7 @@ plt.show()
 # --b--
 '''
 Distribuțiile fixe sunt concentrate în jurul propriei medii (un singur varf),
-iar cea randomizată este mai largă și combină formele tuturor. 
+iar cea randomizată are mai multe varfuri. 
 Asta arată că incertitudinea parametrului lambda duce la o variabilitate
 mai mare a procesului și o distribuție totală mai "răspândită"
 '''
