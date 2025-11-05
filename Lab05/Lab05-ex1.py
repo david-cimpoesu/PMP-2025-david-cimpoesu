@@ -52,3 +52,37 @@ plt.xlabel("Time step")
 plt.ylabel("State")
 plt.legend()
 plt.show()
+
+#bonus
+import math
+T = len(obs_idx)
+S = len(pi)
+def _log(x):
+    return -math.inf if x <= 0 else math.log(x)
+delta = np.full((T, S), -math.inf)
+psi = np.full((T, S), -1, dtype=int)
+o0 = obs_idx[0, 0]
+for i in range(S):
+    delta[0, i] = _log(pi[i]) + _log(B[i, o0])
+    psi[0, i] = -1
+for t in range(1, T):
+    ot = obs_idx[t, 0]
+    for j in range(S):
+        best_val = -math.inf
+        best_i = -1
+        for i in range(S):
+            val = delta[t-1, i] + _log(A[i, j])
+            if val > best_val:
+                best_val = val
+                best_i = i
+        delta[t, j] = best_val + _log(B[j, ot])
+        psi[t, j] = best_i
+last = int(np.argmax(delta[T-1, :]))
+logp = float(delta[T-1, last])
+path = [last]
+for t in range(T-1, 0, -1):
+    path.append(int(psi[t, path[-1]]))
+path.reverse()
+p_path = math.exp(logp)
+print("Bonus Viterbi (manual) states (0=Hard,1=Medium,2=Easy):", path)
+print(f"P(Bonus Viterbi path) = {p_path:.6e}")
