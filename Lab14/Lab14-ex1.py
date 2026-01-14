@@ -75,5 +75,6 @@ print(comp_loo)
 best_waic = comp_waic.index[0]
 best_loo = comp_loo.index[0]
 
+
 print("\nBest by WAIC:", best_waic)
 print("Best by LOO:", best_loo)
